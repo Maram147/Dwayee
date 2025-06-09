@@ -1,0 +1,50 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap');
+:root
+{
+    --main-color:#0d9488;
+    --light-color:#f0f3f2;
+    --shadow: rgba(145,158,171,.2) 0px 2px 4px -1px,rgba(145,158,171,.14) 0px 4px 5px 0px,rgba(145,158,171,.12) 0px 1px 10px 0px;
+    --font-family: Arial, Helvetica, sans-serif;
+    --rating-color:#0f766e;
+}
+body {
+  text-align: center;
+}
+.btn{
+  @apply mt-2 px-4 py-2 w-full rounded-lg text-white bg-[#0d9488]
+}
+.textstyle{
+  font-size: 48px;
+  font-weight: 700;
+}
+.maincolor{
+  color: var(--main-color);
+}
+.mainbgcolor{
+  background-color: var(--main-color);
+}
+/* border border-[#e5e5e5] */
+/* bg-teal-600   hover:bg-teal-700 */
+/* @media (max-width: 640px) {
+  .flex.items-center.justify-between {
+    justify-content: space-between;
+  }
+  .flex.items-center.gap-4 {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}
+@media (max-width: 640px) {
+  button {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+  }
+}
+@media (max-width: 640px) {
+  .relative .h-5.w-5 {
+    height: 1rem;
+    width: 1rem;
+  }
+} */
+

@@ -1,0 +1,9 @@
+{
+  "$schema": "https://unpkg.com/flowbite-react/schema.json",
+  "Pages": [],
+  "dark": true,
+  "prefix": "",
+  "path": "src/Pages",
+  "tsx": true,
+  "rsc": true
+}
