@@ -5,6 +5,7 @@ import { ShoppingBag } from "lucide-react";
 import { Trash2, Plus, Minus, ChevronRight, CreditCard, Upload, AlertCircle } from "lucide-react";
 import placeholder from '@/assets/images/placeholder.svg';
 import { UserContext } from '../../Context/UserContext';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export default function Cart() {
   const { cartItems, updateQuantity, removeItem, deleteCart, fetchCart } = useCart();
@@ -51,7 +52,7 @@ export default function Cart() {
                     {console.log(item)}
                     <div className="flex items-center gap-4">
                       <div className="h-24 w-24  relative bg-gray-100 rounded-md overflow-hidden flex-shrink-0">
-                        <img
+                        <LazyLoadImage
                           src={item.image || placeholder}
                           alt={item.name}
                           fill

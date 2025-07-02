@@ -13,6 +13,7 @@ import style from "./Pharmacies.module.css";
 import debounce from "lodash.debounce";
 import placeholder from "@/assets/images/placeholder.svg";
 import Select from 'react-select';
+import { LazyLoadImage } from "react-lazy-load-image-component";
 export default function Pharmacies() {
   const apiUrl = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
@@ -255,7 +256,7 @@ function PharmacyCard({
       )}
 
       <div className="w-full h-48 overflow-hidden">
-        <img
+        <LazyLoadImage
           src={image}
           alt={name || "Pharmacy Image"}
           className="w-full h-full object-cover object-center"

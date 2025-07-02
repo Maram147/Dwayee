@@ -16,6 +16,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { UserContext } from "../../Context/UserContext";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default function MedicationDetails() {
   const [cnt, setCnt] = useState(1);
@@ -194,7 +195,7 @@ const addToCart = async (medicationId, quantity) => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="border border-teal-400 object-cover rounded-sm">
-          <img
+          <LazyLoadImage
             src={medication.image || placeholder}
             className="p-4 sm:p-6 md:p-8"
             alt={medication.name}

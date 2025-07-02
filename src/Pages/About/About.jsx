@@ -14,6 +14,7 @@ import sondos from '@/assets/images/sondos.svg';
 import donia from '@/assets/images/donia.avif';
 
 import { Heart, Award, Users, Shield, Pill, Clock, MapPin, Phone } from "lucide-react"
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export default function About() {
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -249,7 +250,7 @@ export default function About() {
                 ].map((member, index) => (
                   <div key={index} className="text-center w-full max-w-[250px]">
                     <div className="relative h-64 rounded-lg overflow-hidden mb-4">
-                      <img src={member.image || placeholder} alt={member.name} className="object-cover w-full h-full" />
+                      <LazyLoadImage src={member.image || placeholder} alt={member.name} className="object-cover w-full h-full" />
                     </div>
                     <h3 className="text-lg font-bold">{member.name}</h3>
                     <p className="text-gray-600">{member.role}</p>

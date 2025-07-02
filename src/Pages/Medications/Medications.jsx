@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import placeholder from "@/assets/images/placeholder.svg";
 import debounce from "lodash.debounce";
 import axios from "axios";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default function Medications() {
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -244,7 +245,7 @@ function MedicationCard({ id, title, generic, price, stock, category, pharmacy, 
   return (
     <div className="rounded-lg bg-white border border-[#e5e5e5] hover:shadow transition overflow-hidden" onClick={() => navigate(`/medicationdetails/${id}`)}>
       <div className="bg-gray-100 flex items-center justify-center rounded mb-4 overflow-hidden p-4">
-        <img
+        <LazyLoadImage
           src={image}
           alt={title}
           className="h-full w-full object-cover cursor-pointer"
