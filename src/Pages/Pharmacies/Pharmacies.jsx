@@ -14,6 +14,7 @@ import debounce from "lodash.debounce";
 import placeholder from "@/assets/images/placeholder.svg";
 import Select from 'react-select';
 import { LazyLoadImage } from "react-lazy-load-image-component";
+
 export default function Pharmacies() {
   const apiUrl = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
@@ -72,153 +73,115 @@ export default function Pharmacies() {
     []
   );
 
-  // Initial load effect
   useEffect(() => {
     const initializeData = async () => {
       await getGovernorates();
-      
-      // Read URL parameters
+
       const searchParams = new URLSearchParams(location.search);
       const searchQueryParam = searchParams.get('q');
       const governorateIdParam = searchParams.get('governorate_id');
-      
-      if (searchQueryParam) {
-        setSearchQuery(searchQueryParam);
-      }
-      if (governorateIdParam) {
-        setSelectedGovernorate(governorateIdParam);
-      }
 
-      // Fetch pharmacies with initial parameters
+      if (searchQueryParam) setSearchQuery(searchQueryParam);
+      if (governorateIdParam) setSelectedGovernorate(governorateIdParam);
+
       await getAllPharmacies(1, searchQueryParam || "", governorateIdParam || "");
       setIsInitialLoad(false);
     };
 
     initializeData();
-  }, []); // Empty dependency array for initial load only
+  }, []);
 
-  // Effect for subsequent searches and filters
   useEffect(() => {
     if (!isInitialLoad) {
       getAllPharmacies(currentPage, searchQuery, selectedGovernorate);
     }
   }, [searchQuery, selectedGovernorate, currentPage, isInitialLoad]);
 
-  // Cleanup effect
   useEffect(() => {
-    return () => {
-      debouncedSearchChange.cancel();
-    };
+    return () => debouncedSearchChange.cancel();
   }, [debouncedSearchChange]);
 
   return (
     <div className="bg-gray-50 min-h-screen p-4 sm:p-6 md:p-8">
       <div className="flex flex-col md:flex-row sm:p-6 md:p-8 justify-between items-center">
-        <h1 className="text-2xl font-bold">Pharmacies</h1>
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-4 md:mt-0">
+        <h1 className="text-2xl font-bold text-gray-800">Pharmacies</h1>
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-4 md:mt-0 py-3">
           <div className="relative">
             <input
               type="text"
               placeholder="Search pharmacies..."
               value={searchQuery}
               onChange={(e) => debouncedSearchChange(e.target.value)}
-              className="border border-gray-300 rounded-md px-12 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#10A294]"
+              className="border border-gray-300 rounded-md px-12 py-2 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#10A294]"
             />
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
           </div>
 
-          <select
-            value={selectedGovernorate}
-            onChange={(e) => {
-              setSelectedGovernorate(e.target.value);
-              setCurrentPage(1);
+          <Select
+            aria-label="Governorate"
+            options={[{ value: "", label: "All Governorates" }, ...governorates.map(gov => ({ value: gov.id, label: gov.name }))]}
+            value={selectedGovernorate ? { value: selectedGovernorate, label: governorates.find(g => g.id === selectedGovernorate)?.name || "All Governorates" } : { value: "", label: "All Governorates" }}
+            onChange={(option) => setSelectedGovernorate(option ? option.value : "")}
+            className="w-full text-gray-700"
+            classNamePrefix="react-select"
+            menuPlacement="bottom"
+            styles={{
+              control: (base) => ({
+                ...base,
+                paddingLeft: "2.5rem",
+                borderColor: "#D1D5DB",
+                boxShadow: "none",
+                '&:hover': { borderColor: "#10A294" },
+                borderRadius: "0.5rem",
+                height: "42px"
+              }),
+              option: (base, state) => ({
+                ...base,
+                backgroundColor: state.isSelected ? "#10A294" : state.isFocused ? "rgba(16, 162, 148, 0.1)" : "white",
+                color: state.isSelected ? "white" : "black"
+              }),
+              menu: (base) => ({ ...base, zIndex: 100 }),
+              menuList: (base) => ({ ...base, maxHeight: "192px", overflowY: "auto" })
             }}
-            className="w-full sm:w-auto my-2 border border-gray-300 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#10A294]"
-          >
-            <option value="">All Governorates</option>
-            {governorates.map((gov) => (
-              <option key={gov.id} value={gov.id}>
-                {gov.name}
-              </option>
-            ))}
-          </select>
+          />
         </div>
       </div>
 
-      {/* {error && <div className="text-red-500 text-center mb-4">{error}</div>} */}
-      {error && <div className="text-red-500 text-center mb-4"><div className={style.spinnerContainer}>
-        <div className={style.spinner}></div>
-        <p className="text-sm sm:text-base text-gray-500">Loading...</p>
-      </div></div>}
+      {error && <div className="text-red-500 text-center mb-4">{error}</div>}
 
       {loading ? (
         <div className={style.spinnerContainer}>
           <div className={style.spinner}></div>
-          <p className="text-sm sm:text-base text-gray-500">Loading...</p>
+          <p className="text-sm text-gray-500">Loading...</p>
         </div>
       ) : pharmacies.length === 0 ? (
         <div className="text-center text-gray-500">No pharmacies found.</div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 text-start">
-          {pharmacies.map((pharmacy, index) => {
-            const imageUrl =
-              pharmacy.image && typeof pharmacy.image === "string"
-                ? pharmacy.image
-                : placeholder;
-            return (
-              <PharmacyCard
-                key={index}
-                name={pharmacy.name}
-                address={pharmacy.address}
-                location={`${pharmacy.city?.name}, ${pharmacy.governorate?.name}`}
-                time={`${pharmacy.opening_time?.slice(0, 5)} - ${pharmacy.closing_time?.slice(0, 5)}`}
-                number={pharmacy.phone}
-                image={imageUrl}
-                showDeliveryBadge={pharmacy.is_delivery_available}
-                data={pharmacy}
-              />
-            );
-          })}
+          {pharmacies.map((pharmacy, index) => (
+            <PharmacyCard key={index} data={pharmacy} />
+          ))}
         </div>
       )}
 
-      <div className="flex justify-center mt-10">
-        <nav className="flex flex-wrap justify-center items-center gap-2 sm:gap-1">
+      <div className="flex justify-center mt-10 ">
+        <nav className="flex flex-wrap justify-center items-center gap-2">
           {paginationLinks.map((link, index) => {
             if (link.label.includes("Previous")) {
               return (
-                <button
-                  key={index}
-                  onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
-                  disabled={!link.url}
-                  className="flex items-center justify-center w-10 h-10 rounded-lg border border-gray-300 bg-white text-gray-500 hover:bg-gray-100 disabled:opacity-50"
-                >
+                <button key={index} onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)} disabled={!link.url} className="w-10 h-10 rounded border border-gray-300 bg-white text-gray-500 hover:bg-gray-100 disabled:opacity-50">
                   <ChevronLeft size={16} />
                 </button>
               );
             } else if (link.label.includes("Next")) {
               return (
-                <button
-                  key={index}
-                  onClick={() => {
-                    if (currentPage < lastPage) setCurrentPage(currentPage + 1);
-                  }}
-                  disabled={!link.url}
-                  className="flex items-center justify-center w-10 h-10 rounded-lg border border-gray-300 bg-white text-gray-500 hover:bg-gray-100 disabled:opacity-50"
-                >
+                <button key={index} onClick={() => currentPage < lastPage && setCurrentPage(currentPage + 1)} disabled={!link.url} className="w-10 h-10 rounded border border-gray-300 bg-white text-gray-500 hover:bg-gray-100 disabled:opacity-50">
                   <ChevronRight size={16} />
                 </button>
               );
             } else {
               return (
-                <button
-                  key={index}
-                  onClick={() => setCurrentPage(parseInt(link.label))}
-                  className={`w-10 h-10 flex items-center justify-center rounded-lg border ${link.active
-                      ? "mainbgcolor text-white border-teal-600"
-                      : "border-gray-300 bg-white text-gray-700 hover:bg-gray-100"
-                    }`}
-                >
+                <button key={index} onClick={() => setCurrentPage(parseInt(link.label))} className={`w-10 h-10 rounded border ${link.active ? "mainbgcolor text-white border-teal-600" : "border-gray-300 bg-white text-gray-700 hover:bg-gray-100"}`}>
                   {link.label}
                 </button>
               );
@@ -230,26 +193,13 @@ export default function Pharmacies() {
   );
 }
 
-function PharmacyCard({
-  name,
-  address,
-  location,
-  time,
-  number,
-  image,
-  showDeliveryBadge,
-  data,
-}) {
+function PharmacyCard({ data }) {
   const navigate = useNavigate();
+  const { name, address, city, governorate, opening_time, closing_time, phone, image, is_delivery_available } = data;
 
   return (
-    <div
-      className="relative overflow-hidden rounded-xl bg-white shadow-md hover:shadow-lg transition cursor-pointer"
-      onClick={() => {
-        navigate(`/pharmacydetails/${data.id}`, { state: { pharmacy: data } });
-      }}
-    >
-      {showDeliveryBadge && (
+    <div className="relative overflow-hidden rounded-xl bg-white shadow-md hover:shadow-lg transition cursor-pointer" onClick={() => navigate(`/pharmacydetails/${data.id}`, { state: { pharmacy: data } })}>
+      {is_delivery_available && (
         <span className="absolute top-2 right-2 mainbgcolor text-white text-xs font-semibold px-3 py-1 rounded-full">
           Delivery Available
         </span>
@@ -257,28 +207,26 @@ function PharmacyCard({
 
       <div className="w-full h-48 overflow-hidden">
         <LazyLoadImage
-          src={image}
+          src={image || placeholder}
           alt={name || "Pharmacy Image"}
           className="w-full h-full object-cover object-center"
-          onError={(e) => {
-            e.currentTarget.src = placeholder;
-          }}
+          onError={(e) => (e.currentTarget.src = placeholder)}
         />
       </div>
 
       <div className="space-y-2 p-4">
-        <h3 className="font-bold text-xl line-clamp-1">{name}</h3>
-        <p className="text-sm flex items-center font-bold text-gray-500">
+        <h3 className="font-bold text-xl line-clamp-1 text-gray-800">{name}</h3>
+        <p className="text-sm flex items-center text-gray-600">
           <MapPin className="maincolor w-5 h-5 flex-shrink-0" />
-          <span className="text-sm line-clamp-1 ml-1">{location}</span>
+          <span className="ml-1 line-clamp-1">{`${city?.name}, ${governorate?.name}`}</span>
         </p>
-        <p className="text-sm flex gap-1 font-bold text-gray-500">
-          <Clock4 className="maincolor w-5 h-5 flex-shrink-0" /> 
-          <span>{time}</span>
+        <p className="text-sm flex items-center text-gray-600">
+          <Clock4 className="maincolor w-5 h-5 flex-shrink-0" />
+          <span className="ml-1">{`${opening_time?.slice(0, 5)} - ${closing_time?.slice(0, 5)}`}</span>
         </p>
-        <p className="text-sm flex gap-1 font-bold text-gray-500">
-          <Phone className="maincolor w-5 h-5 flex-shrink-0" /> 
-          <span>{number}</span>
+        <p className="text-sm flex items-center text-gray-600">
+          <Phone className="maincolor w-5 h-5 flex-shrink-0" />
+          <span className="ml-1">{phone}</span>
         </p>
       </div>
     </div>
