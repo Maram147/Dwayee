@@ -21,6 +21,7 @@ import {
   Stethoscope,
   Tablets,
 } from "lucide-react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default function PharmacyDetails() {
   const location = useLocation();
@@ -193,7 +194,7 @@ export default function PharmacyDetails() {
       </div>
 
       <div className="relative h-80 overflow-hidden mb-6">
-        <img
+        <LazyLoadImage
           src={image || placeholder}
           alt={name || "Pharmacy Image"}
           className="absolute inset-0 w-full h-full object-cover"
@@ -338,7 +339,7 @@ export default function PharmacyDetails() {
                               onClick={() => navigate(`/medicationdetails/${med.id}`)}
                             >
                               <div className="w-full mb-1">
-                                <img
+                                <LazyLoadImage
                                   src={med.image || "/placeholder.svg"}
                                   alt={med.name}
                                   className="w-full h-auto object-contain"

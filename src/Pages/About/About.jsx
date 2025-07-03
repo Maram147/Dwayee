@@ -97,7 +97,7 @@ export default function About() {
                   </div>
                 </div>
                 <div className="relative h-[400px] rounded-lg overflow-hidden">
-                  <img
+                  <LazyLoadImage
                     src={randomPharmacyImage}
                     alt="Dwayee Team"
                     className="object-cover w-full h-full"

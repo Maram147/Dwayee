@@ -43,6 +43,7 @@ import {
 import { Label } from "../../../components/UI/label";
 import { Textarea } from "../../../components/UI/textarea";
 import { UserContext } from "../../../Context/UserContext";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default function InventoryPage() {
   const { userLogin, pharmacy } = useContext(UserContext);
@@ -521,7 +522,7 @@ export default function InventoryPage() {
                         <div className="flex items-center justify-center h-32 bg-gray-50 rounded-md relative">
                           {newProduct.imageUrl ? (
                             <div className="relative w-full h-full">
-                              <img src={newProduct.imageUrl} alt="Product preview" className="h-full w-auto mx-auto object-contain" />
+                              <LazyLoadImage src={newProduct.imageUrl} alt="Product preview" className="h-full w-auto mx-auto object-contain" />
                               <button
                                 type="button"
                                 variant="ghost"
@@ -919,7 +920,7 @@ export default function InventoryPage() {
                     <div className="flex items-center justify-center h-32 bg-gray-50 rounded-md relative">
                       {newProduct.imageUrl ? (
                         <div className="relative w-full h-full">
-                          <img
+                          <LazyLoadImage
                             src={newProduct.imageUrl}
                             alt={newProduct.name}
                             className="w-32 h-32 object-contain rounded-md"

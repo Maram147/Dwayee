@@ -39,6 +39,7 @@ import { useToast } from "../../../components/UI/use-toast";
 import axios from "axios";
 import { UserContext } from "../../../Context/UserContext";
 import debounce from "lodash.debounce";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default function OrdersPage() {
   const { toast } = useToast();
@@ -594,7 +595,7 @@ export default function OrdersPage() {
                         <span className="text-xs sm:text-sm">Product:</span>
                         <div className="flex items-center gap-2 text-xs sm:text-sm font-medium max-w-[150px] sm:max-w-[200px]">
                           {item.medication?.image && (
-                            <img
+                            <LazyLoadImage
                               src={item.medication.image}
                               alt={item.medication.name}
                               className="w-6 h-6 sm:w-8 sm:h-8 object-cover rounded"

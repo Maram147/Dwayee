@@ -319,7 +319,7 @@ text-white px-4 py-2 rounded">Google Play</button>
                 </div>
               </div>
               <div className="flex justify-center">
-                <img
+                <LazyLoadImage
                   src={randomPharmacyImage}
                   alt="Pharmacy Illustration"
                   className="w-full h-[400px] rounded-lg object-cover"
@@ -333,7 +333,7 @@ text-white px-4 py-2 rounded">Google Play</button>
           <div className="mx-auto max-w-7xl">
             <div className="grid md:grid-cols-2 items-center gap-10">
               <div className="flex justify-center">
-                <img
+                <LazyLoadImage
                   src={randomPharmacyImage}
                   alt="Pharmacy Illustration"
                   className="w-full h-[400px] rounded-lg object-cover"

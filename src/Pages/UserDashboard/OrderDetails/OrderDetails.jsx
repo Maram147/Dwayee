@@ -3,6 +3,7 @@ import { Link, useNavigate, useSearchParams, useParams } from "react-router-dom"
 import placeholder from '@/assets/images/placeholder.svg';
 import { MapPin, CreditCard, Calendar } from 'lucide-react'
 import { UserContext } from '../../../Context/UserContext';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const orderItems = [
   { name: "Panadol Extra", quantity: 2, price: 35 },
@@ -109,7 +110,7 @@ export default function OrderDetails() {
 const OrderItem = ({ name, imgUrl, quantity, price, total }) => (
   <div className="flex items-center justify-between border-b border-gray-300 py-3">
     <div className="flex gap-4">
-      <img
+      <LazyLoadImage
         src={imgUrl}
         alt="name"
         className="h-12 w-12 object-cover rounded"

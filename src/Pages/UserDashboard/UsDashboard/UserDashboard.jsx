@@ -368,42 +368,6 @@ export default function UserDashboard() {
                 </div>
               </>
             )}
-            {/* {activeTab === 'SavedMedications' && (
-              <>
-                <div className="bg-white rounded-lg shadow-xs p-6 border border-gray-300">
-                  <h2 className="text-2xl font-bold mb-1 text-start">Saved Medications</h2>
-                  <p className="text-gray-500 mb-6 text-start">Your favorite and frequently ordered medications</p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {SavedMedications.map((med, index) => (
-                      <div key={index} className="bg-white rounded-lg shadow-sm p-4 border border-gray-300">
-                        <div className="flex items-center gap-4 mb-4">
-                          <img
-                            src={med.image}
-                            alt={med.name}
-                            className="h-12 w-12 object-contain rounded"
-                            onError={(e) => {
-                              e.currentTarget.src = { placeholder };
-                            }}
-                          />
-                          <div>
-                            <h3 className="font-semibold text-start">{med.name}</h3>
-                            <p className="text-gray-500 text-sm">Last ordered: {med.lastOrdered}</p>
-                          </div>
-                        </div>
-                        <div className="flex gap-2">
-                          <button className="w-1/2 border border-gray-300 py-2 rounded hover:bg-gray-200">
-                            View
-                          </button>
-                          <button className="w-1/2 bg-black text-white py-2 rounded hover:opacity-80">
-                            Order
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </>
-            )} */}
           </div>
           <div className="space-y-6">
             <div className="bg-white p-4 rounded shadow text-center border border-gray-100">
