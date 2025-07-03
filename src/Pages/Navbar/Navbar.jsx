@@ -64,7 +64,7 @@ export default function Navbar() {
           <Link to="/contact" className="text-sm font-medium hover:text-teal-600">Contact</Link>
         </nav>
         <div className="hidden md:flex items-center gap-4">
-          <NavLink to="/cart" className="relative">
+          <NavLink to="/cart" className="relative" aria-label="View your cart">
             <ShoppingCart className="h-5 w-5 text-gray-700" />
             {totalQuantity > 0 && (
               <span className="absolute -top-2 -right-2 bg-teal-600 text-white text-xs font-bold px-1 py-0.5 rounded-full">
@@ -131,7 +131,7 @@ export default function Navbar() {
           <NavLink to="/contact" className="text-sm font-medium text-gray-700 hover:text-teal-600">
             Contact
           </NavLink>
-          <NavLink to="/cart" className="relative">
+          <NavLink to="/cart" className="relative" aria-label="View your cart">
             <ShoppingCart className="h-5 w-5 text-gray-700" />
             {totalQuantity > 0 && (
               <span className="absolute -top-2 -right-2 bg-teal-600 text-white text-xs font-bold px-1 py-0.5 rounded-full">

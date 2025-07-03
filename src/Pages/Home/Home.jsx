@@ -4,7 +4,7 @@ import { Search, MapPin, Clock, Pill, ShoppingBag, Phone, ChevronRight, Heart, A
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar'
 import placeholder from '@/assets/images/placeholder.svg';
-
+import { LockIcon } from 'lucide-react';
 
 import home from '@/assets/images/Home.jpg';
 
