@@ -97,7 +97,7 @@ export default function Checkout() {
         <div className="flex items-center text-sm text-gray-500">
           <Link to="/" className="hover:text-teal-600">Home</Link>
           <ChevronRight className="h-4 w-4 mx-1" />
-          <Link to="/cart" className="hover:text-teal-600">Cart</Link>
+          <Link to="/cart" className="hover:text-teal-600" aria-label="View your cart">Cart</Link>
           <ChevronRight className="h-4 w-4 mx-1" />
           <span className="text-gray-700">Checkout</span>
         </div>
@@ -198,7 +198,7 @@ export default function Checkout() {
         </div>
       </div>
       <div className="flex justify-between mt-6">
-        <Link to="/cart">
+        <Link to="/cart" aria-label="View your cart">
           <button to={'cart'} variant="outline" onClick={() => setStep("cart")} className='bg-white text-black border border-[#e5e5e5]  py-3 px-3  rounded-md hover:bg-gray-200'>
             Back to Cart
           </button>

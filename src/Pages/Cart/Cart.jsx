@@ -26,7 +26,7 @@ export default function Cart() {
               Home
             </Link>
             <ChevronRight className="h-4 w-4 mx-1" />
-            <Link to="/cart" className="hover:text-teal-600">
+            <Link to="/cart" className="hover:text-teal-600" aaria-label="View your cart">
               cart
             </Link>
           </div>

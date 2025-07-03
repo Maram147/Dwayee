@@ -33,7 +33,7 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           {/* Shopping Cart */}
           <NavLink to="/cart" className="relative">
-              <ShoppingCart className="h-5 w-5 text-gray-700" />
+              <ShoppingCart className="h-5 w-5 text-gray-700"  />
               {totalQuantity > 0 && (
                 <span className="absolute -top-4 -right-3 bg-[#0d9488] text-white text-xs font-bold px-2 py-1 rounded-full">
                   {totalQuantity}

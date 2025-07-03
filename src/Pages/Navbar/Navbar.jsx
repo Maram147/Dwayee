@@ -104,7 +104,7 @@ export default function Navbar() {
                 </button>
               </Link>
               <Link to="/join">
-                <button className="bg-teal-600 text-white px-4 py-1.5 rounded-md text-sm hover:bg-teal-700 transition">
+                <button className="bg-teal-700 text-white px-4 py-1.5 rounded-md text-sm hover:bg-teal-800 transition">
                   Join as Pharmacy
                 </button>
               </Link>
@@ -167,7 +167,7 @@ export default function Navbar() {
                 </button>
               </Link>
               <Link to="/join" className="w-full">
-                <button className="w-full bg-teal-600 text-white py-1.5 rounded-md text-sm hover:bg-teal-700 transition">
+                <button className="w-full bg-teal-700 text-white py-1.5 rounded-md text-sm hover:bg-teal-800 transition">
                   Join as Pharmacy
                 </button>
               </Link>

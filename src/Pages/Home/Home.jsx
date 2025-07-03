@@ -113,6 +113,7 @@ export default function Home() {
                     <div className="relative w-1/2 z-30">
                       <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 z-40" />
                       <Select
+                       aria-label="Governorate"
                         options={[
                           { value: "", label: "All Governorates" },
                           ...governorates.map((gov) => ({
@@ -183,7 +184,7 @@ export default function Home() {
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-teal-600 hover:bg-teal-700 text-white py-2 rounded-lg"
+                    className="w-full bg-teal-700 hover:bg-teal-800 text-white py-2 rounded-lg"
                   >
                     Search Pharmacies
                   </button>
