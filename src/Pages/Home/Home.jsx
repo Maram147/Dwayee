@@ -10,6 +10,7 @@ import home from '@/assets/images/Home.jpg';
 
 import axios from 'axios';
 import Select from 'react-select';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -112,8 +113,11 @@ export default function Home() {
                     {/* Governorate Select using react-select */}
                     <div className="relative w-1/2 z-30">
                       <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 z-40" />
+                      <label htmlFor="governorate-select" className="sr-only">
+                        Select Governorate
+                      </label>
                       <Select
-                       aria-label="Governorate"
+                        aria-label="Governorate"
                         options={[
                           { value: "", label: "All Governorates" },
                           ...governorates.map((gov) => ({
@@ -191,7 +195,7 @@ export default function Home() {
                 </form>
               </div>
               <div className="flex justify-center">
-                <img
+                <LazyLoadImage
                   src={home}
                   alt="Pharmacy Illustration"
                   className="w-full h-[400px] rounded-lg object-cover"
@@ -216,7 +220,7 @@ export default function Home() {
                   <Search className="h-8 w-8 maincolor" />
                 </div>
                 <h3 className="text-xl font-bold">Search</h3>
-                <p className="text-gray-500">
+                <p className="text-gray-700">
                   Find medications by name, category, or symptoms. Compare prices across pharmacies.
                 </p>
               </div>
@@ -257,7 +261,7 @@ export default function Home() {
                   className="bg-white rounded-lg overflow-hidden"
                 >
                   <div className="w-full h-[400px] overflow-hidden">
-                    <img
+                    <LazyLoadImage
                       src={pham.image}
                       alt={pham.name}
                       className="w-full h-full object-cover"
@@ -341,7 +345,8 @@ text-white px-4 py-2 rounded">Google Play</button>
                   Join Dwayee as a pharmacy partner and expand your business reach. Connect with more customers and increase your sales.
                 </p>
                 <Link to="/join">
-                  <button className="px-5 py-2 bg-[#0d9488] text-white rounded hover:bg-[#0f766e]">
+                  <button className="px-5 py-2 bg-teal-800 text-white rounded hover:bg-teal-900">
+
                     Join as Pharmacy Partner
                   </button>
                 </Link>
