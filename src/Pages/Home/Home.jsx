@@ -366,7 +366,7 @@ text-white px-4 py-2 rounded">Google Play</button>
                 <p className='text-gray-500'>Trusted platform for finding and ordering medications.</p>
               </div>
               <div>
-                <h4 className=" text-black text-lg font-medium">Quick Links</h4>
+                <h4 className="text-black text-lg font-medium">Quick Links</h4>
                 <ul className="space-y-2 text-sm">
                   <li>
                     <NavLink to="/" className="text-gray-500 hover:maincolor">
